@@ -26848,6 +26848,8 @@ var __webpack_exports__ = {};
 (() => {
 const core = __nccwpck_require__(2186);
 const axios = __nccwpck_require__(8757);
+const fs = __nccwpck_require__(7147);
+const { spawn } = __nccwpck_require__(2081);
 const { Toolkit } = __nccwpck_require__(7045);
 
 const key = core.getInput("KEY");
@@ -26856,13 +26858,13 @@ async function getYoutubeSubNumber() {
   const req = await axios.get(
     `https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=UCy1Q33r6POsxGTtZcOF--Fw&key=${key}`
   );
-  console.log(req.data.items[0].statistics);
+  return req.data.items[0].statistics;
 }
 
 Toolkit.run(async (tools) => {
   try {
-    console.log(key);
-    await getYoutubeSubNumber();
+    const { subscriberCount, videoCount } = await getYoutubeSubNumber();
+    console.log(subscriberCount, videoCount);
   } catch (error) {
     tools.exit.failure(error);
   }

@@ -5,6 +5,19 @@ inputs:
     description: "KEY"
     default: ""
     required: false
+  GITHUB_TOKEN:
+    description: "Github token"
+    default: ${{ github.token }}
+    required: false
+  COMMITTER_USERNAME:
+    description: "Commit username"
+    default: "bot"
+    required: false
+  COMMITTER_EMAIL:
+    description: :"Commit email"
+    default: "bot@exapmle.com"
+    required: false
+
 runs:
   using: 'node16'
   main: 'dist/index.js'
