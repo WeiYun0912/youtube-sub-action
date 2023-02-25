@@ -3,7 +3,7 @@ description: "Test"
 inputs:
   KEY:
     description: "KEY"
-    default: "123"
+    default: ""
     required: false
 runs:
   using: 'node16'
