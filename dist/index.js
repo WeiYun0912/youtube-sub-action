@@ -26860,7 +26860,12 @@ async function getYoutubeSubNumber() {
 }
 
 Toolkit.run(async (tools) => {
-  await getYoutubeSubNumber();
+  try {
+    console.log(key);
+    await getYoutubeSubNumber();
+  } catch (error) {
+    tools.exit.failure(error);
+  }
   tools.exit.success("success");
 });
 
