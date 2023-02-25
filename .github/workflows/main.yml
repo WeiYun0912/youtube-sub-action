@@ -9,4 +9,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Updates Youtube Sub Count
-        uses: WeiYun0912/youtube-sub-action@main
+        uses: tj-actions/puppeteer@v4
+        id: puppeteer
+        with:
+          files: |
+            'dist/index.js'
