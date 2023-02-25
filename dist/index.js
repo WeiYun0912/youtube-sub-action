@@ -67896,6 +67896,7 @@ const puppeteer = __nccwpck_require__(7174);
 async function getYoutubeSubNumber() {
   const browser = await puppeteer.launch({
     headless: true,
+    args: ["--no-sandbox"],
   });
 
   const page = await browser.newPage();
