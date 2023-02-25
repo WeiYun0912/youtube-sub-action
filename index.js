@@ -1,24 +1,17 @@
+const core = require("@actions/core");
+const axios = require("axios");
 const { Toolkit } = require("actions-toolkit");
-const puppeteer = require("puppeteer");
-async function getYoutubeSubNumber() {
-  const browser = await puppeteer.launch({
-    headless: true,
-    args: ["--no-sandbox", "--disable-setuid-sandbox"],
-  });
 
-  const page = await browser.newPage();
-  await page.setDefaultNavigationTimeout(0);
-  await page.goto("https://www.youtube.com/channel/UCy1Q33r6POsxGTtZcOF--Fw");
-  await page.waitForSelector("#contents");
-  const sub = await page.$eval("#subscriber-count", (el) =>
-    el.textContent.trim()
+const key = core.getInput("KEY");
+
+async function getYoutubeSubNumber() {
+  const req = await axios.get(
+    `https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=UCy1Q33r6POsxGTtZcOF--Fw&key=${key}`
   );
-  browser.close();
-  return sub;
+  console.log(req.data.items[0].statistics);
 }
 
 Toolkit.run(async (tools) => {
-  const sub = await getYoutubeSubNumber();
-  console.log(sub);
+  await getYoutubeSubNumber();
   tools.exit.success("success");
 });

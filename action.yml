@@ -1,6 +1,10 @@
 name: "My Github Action TEST"
 description: "Test"
-
+inputs:
+  KEY:
+    description: "KEY"
+    default: ""
+    required: false
 runs:
   using: 'node16'
   main: 'dist/index.js'
